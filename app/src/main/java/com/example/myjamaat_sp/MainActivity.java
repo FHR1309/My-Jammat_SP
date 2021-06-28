@@ -44,9 +44,21 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, detailActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+        });
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+
                 masjidList.remove(position);
                 arrayAdapter.notifyDataSetChanged();
                 sharedPreferences.edit().putString("masjidListStorable", Storable.encode(masjidList)).apply();
+                return true;
             }
         });
 
